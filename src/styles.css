@@ -1,0 +1,270 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 16px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-gold: var(--gold);
+  --color-rose: var(--rose);
+  --color-blush: var(--blush);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-soft: 0 10px 40px -12px color-mix(in oklab, var(--primary) 30%, transparent);
+  --shadow-glow: 0 20px 60px -15px color-mix(in oklab, var(--primary) 45%, transparent);
+  --shadow-card: 0 4px 24px -8px color-mix(in oklab, var(--rose) 35%, transparent);
+}
+
+:root {
+  --radius: 1rem;
+
+  /* Sophisticated rose palette */
+  --background: oklch(0.985 0.012 15);
+  --foreground: oklch(0.22 0.06 350);
+  --ink: oklch(0.18 0.05 350);
+
+  --card: oklch(0.995 0.005 15);
+  --card-foreground: oklch(0.22 0.06 350);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.06 350);
+
+  --primary: oklch(0.62 0.22 8);          /* deep raspberry pink */
+  --primary-foreground: oklch(0.99 0.005 15);
+  --primary-soft: oklch(0.78 0.14 10);
+
+  --rose: oklch(0.78 0.13 12);
+  --blush: oklch(0.92 0.05 15);
+  --cream: oklch(0.97 0.018 60);
+  --gold: oklch(0.78 0.13 75);
+
+  --secondary: oklch(0.94 0.04 15);
+  --secondary-foreground: oklch(0.28 0.07 350);
+
+  --muted: oklch(0.95 0.02 15);
+  --muted-foreground: oklch(0.5 0.04 350);
+  --accent: oklch(0.88 0.08 12);
+  --accent-foreground: oklch(0.22 0.06 350);
+
+  --destructive: oklch(0.6 0.22 27);
+  --destructive-foreground: oklch(0.99 0.005 15);
+  --border: oklch(0.9 0.03 15);
+  --input: oklch(0.9 0.03 15);
+  --ring: oklch(0.62 0.22 8);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  /* Scrollbar — paleta rosa / framboesa */
+  html {
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklab, var(--primary) 82%, var(--rose)) var(--blush);
+  }
+
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: var(--blush);
+    border-radius: 9999px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--primary) 0%, oklch(0.52 0.2 350) 100%);
+    border-radius: 9999px;
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, white 22%, transparent);
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, oklch(0.58 0.22 8) 0%, var(--primary) 100%);
+  }
+
+  *::-webkit-scrollbar-corner {
+    background: var(--blush);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+    font-weight: 600;
+  }
+}
+
+@layer utilities {
+  .font-display { font-family: var(--font-display); }
+  .font-sans { font-family: var(--font-sans); }
+
+  .bg-gradient-rose {
+    background: linear-gradient(135deg,
+      oklch(0.97 0.025 15) 0%,
+      oklch(0.92 0.06 12) 50%,
+      oklch(0.86 0.1 10) 100%);
+  }
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--rose) 100%);
+  }
+  .bg-gradient-cream {
+    background: linear-gradient(180deg, var(--cream) 0%, var(--blush) 100%);
+  }
+  .text-gradient {
+    background: linear-gradient(135deg, var(--primary) 0%, oklch(0.5 0.22 350) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+  .shadow-card { box-shadow: var(--shadow-card); }
+
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle at 1px 1px, color-mix(in oklab, var(--primary) 10%, transparent) 1px, transparent 0);
+    background-size: 24px 24px;
+    opacity: 0.4;
+  }
+
+  @keyframes testimonial-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  .animate-testimonial-marquee {
+    animation: testimonial-marquee linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-testimonial-marquee {
+      animation-play-state: paused;
+    }
+  }
+}
+
+/* Instagram rodapé — baseado em Uiverse (vinodjangid07) */
+a.instagram-uiverse-link {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: transparent;
+  position: relative;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+
+a.instagram-uiverse-link .instagram-uiverse-link__icon-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  backdrop-filter: blur(4px);
+  letter-spacing: 0.8px;
+  border-radius: 10px;
+  transition: all 0.3s;
+  border: 1px solid rgba(156, 156, 156, 0.466);
+  position: relative;
+  z-index: 1;
+}
+
+a.instagram-uiverse-link .instagram-uiverse-link__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
+  z-index: 0;
+  border-radius: 9px;
+  pointer-events: none;
+  transition: transform 0.3s;
+}
+
+a.instagram-uiverse-link .instagram-uiverse-link__svg {
+  height: 1.5em;
+  width: auto;
+  display: block;
+}
+
+a.instagram-uiverse-link:hover .instagram-uiverse-link__bg {
+  transform: rotate(35deg);
+  transform-origin: bottom;
+}
+
+a.instagram-uiverse-link:hover .instagram-uiverse-link__icon-wrap {
+  background-color: rgba(156, 156, 156, 0.466);
+}
+
+a.instagram-uiverse-link:focus-visible {
+  outline: 2px solid color-mix(in oklab, white 85%, transparent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a.instagram-uiverse-link:hover .instagram-uiverse-link__bg {
+    transform: none;
+  }
+}
